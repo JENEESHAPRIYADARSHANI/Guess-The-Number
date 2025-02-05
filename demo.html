@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A game based on JS</title>
+</head>
+<body>
+    <p id="demo"></p>
+    <script>
+        var person = prompt("Please enter your name", "Harry Potter");
+        if (person !== null) {
+            document.getElementById("demo").innerHTML =
+                "Hello " + person + "Math is fun";
+        }
+    </script>
+
+    <h1>Game</h1>
+    <p>Click the button to start the game.</p>
+    <input type="text" id="guessnumber" placeholder="Enter your number (1-100)">
+    <button onclick="startGame()">Start Game</button>
+    <p id="result">Result</p>
+    <p id="score">Score: 10</p>
+
+    <script>
+        var guessnumber = document.getElementById("guessnumber");
+        var result = document.getElementById("result");
+        var totalscore = document.getElementById("score");
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var score = 10; // Declare a separate score variable
+
+        function startGame() {
+            var enterednumber = Number(guessnumber.value); // Convert input to number
+
+            if (enterednumber === randomNumber) {
+                console.log("Right");
+                result.textContent = "🎉 Correct! You won!";
+                alert("You won! 🎉");
+            } else {
+                score -= 1; // Reduce the score by 1
+                totalscore.textContent = "Score: " + score; // Update score display
+
+                if (enterednumber > randomNumber) {
+                    result.textContent = "❌ high! Try again.";
+                } else {
+                    result.textContent = "❌  low! Try again.";
+                }
+
+                if (score === 0) {
+                    result.textContent = "💀 Game over! The correct number was " + randomNumber;
+                    alert("Game over! The correct number was " + randomNumber);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
