@@ -6,7 +6,6 @@
     <title>Guessing Game</title>
 
     <link rel="stylesheet" href="game.css">
-
 </head>
 <body>
     <div class="container">
@@ -28,7 +27,8 @@
         <p>Guess a number between 1-100:</p>
 
         <div class="input-container">
-            <input type="text" id="guessnumber" placeholder="Enter your number">
+            <input type="number" id="guessnumber" placeholder="Enter your number" 
+                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             <button class="start-btn" onclick="startGame()">Guess</button>
         </div>
 
@@ -53,8 +53,12 @@
         function startGame() {
             var enterednumber = Number(guessnumber.value); // Convert input to number
 
+            if (enterednumber < 1 || enterednumber > 100 || isNaN(enterednumber)) {
+                alert("Please enter a number between 1 and 100!");
+                return;
+            }
+
             if (enterednumber === randomNumber) {
-                console.log("Right");
                 result.textContent = "🎉 Correct! You won!";
                 alert("You won! 🎉");
             } else {
@@ -66,17 +70,11 @@
                 progressFill.style.width = progressPercentage + "%";
 
                 // Change progress bar color to red when score is below 5
-                if (score < 5) {
-                    progressFill.style.backgroundColor = "red";
-                } else {
-                    progressFill.style.backgroundColor = "green";
-                }
+                progressFill.style.backgroundColor = score < 5 ? "red" : "green";
 
-                if (enterednumber > randomNumber) {
-                    result.textContent = "❌ My number is lower than your number";
-                } else {
-                    result.textContent = "❌ My number is greater than your number";
-                }
+                result.textContent = enterednumber > randomNumber 
+                    ? "❌ My number is lower than your number" 
+                    : "❌ My number is greater than your number";
 
                 if (score <= 0) {
                     result.textContent = "💀 Game over! The correct number was " + randomNumber;
