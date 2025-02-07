@@ -34,8 +34,8 @@ h1 {
 }
 
 .start-btn {
-    background-color: #787878;
-    color: white;
+    background-color: #a67c7c;
+    color: black;
     padding: 10px 20px;
     font-size: 1.2rem;
     border: none;
@@ -44,7 +44,7 @@ h1 {
 }
 
 .start-btn:hover {
-    background-color: #666666;
+    background-color: white;
 }
 
 .input-container {
@@ -75,25 +75,44 @@ input {
 }
 
 .progress-bar {
-    width: 80%;
+    width: 100%;
     height: 20px;
-    background-color: lightgray;
-    border: 2px solid green;
-    margin: 20px auto;
-    position: relative;
-    border-radius: 5px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 .progress-fill {
-    width: 70%;
+    width: 100%;
     height: 100%;
     background-color: green;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
+
 
 .message {
     font-size: 1.5rem;
     color: gray;
 }
+
+.restart-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #a67c7c;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.restart-btn:hover {
+    background-color: white;
+}
+
 
 .guess-history {
     font-size: 1.2rem;

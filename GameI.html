@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+
+    <link rel="stylesheet" href="game.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="game-info">
+            <!-- display person name -->
+            <p id="name"></p>
+            <script>
+                var person = prompt("Please enter your name");
+                if (person !== null) {
+                    document.getElementById("name").innerHTML =
+                        "Hello " + person + "! Math is fun";
+                }
+            </script>
+            <p id="score">Score: 10</p>
+        </div>
+
+        <h1>Guessing Game!</h1>
+
+        <p>Guess a number between 1-100:</p>
+
+        <div class="input-container">
+            <input type="text" id="guessnumber" placeholder="Enter your number">
+            <button class="start-btn" onclick="startGame()">Guess</button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <p id="result">Result</p>
+
+        <!-- Restart Game Button -->
+        <button class="restart-btn" onclick="restartGame()">Restart Game</button>
+    </div>
+
+    <script>
+        var guessnumber = document.getElementById("guessnumber");
+        var result = document.getElementById("result");
+        var totalscore = document.getElementById("score");
+        var progressFill = document.querySelector(".progress-fill"); // Select the progress bar
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var score = 10; // Declare a separate score variable
+
+        function startGame() {
+            var enterednumber = Number(guessnumber.value); // Convert input to number
+
+            if (enterednumber === randomNumber) {
+                console.log("Right");
+                result.textContent = "🎉 Correct! You won!";
+                alert("You won! 🎉");
+            } else {
+                score -= 1; // Reduce the score by 1
+                totalscore.textContent = "Score: " + score; // Update score display
+
+                // Update progress bar width
+                var progressPercentage = (score / 10) * 100;
+                progressFill.style.width = progressPercentage + "%";
+
+                // Change progress bar color to red when score is below 5
+                if (score < 5) {
+                    progressFill.style.backgroundColor = "red";
+                } else {
+                    progressFill.style.backgroundColor = "green";
+                }
+
+                if (enterednumber > randomNumber) {
+                    result.textContent = "❌ My number is lower than your number";
+                } else {
+                    result.textContent = "❌ My number is greater than your number";
+                }
+
+                if (score <= 0) {
+                    result.textContent = "💀 Game over! The correct number was " + randomNumber;
+                    alert("Game over! The correct number was " + randomNumber);
+                }
+            }
+        }
+
+        function restartGame() {
+            score = 10; // Reset score
+            randomNumber = Math.floor(Math.random() * 100) + 1; // Generate new random number
+            totalscore.textContent = "Score: 10"; // Reset score display
+            result.textContent = "Result"; // Reset result message
+            guessnumber.value = ""; // Clear input field
+
+            // Reset progress bar
+            progressFill.style.width = "100%";
+            progressFill.style.backgroundColor = "green";
+        }
+    </script>
+
+</body>
+</html>
